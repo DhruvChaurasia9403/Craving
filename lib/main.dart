@@ -1,25 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'pages/navigation/main_navigation.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'screens/home/home_screen.dart';
+import 'blocs/category/category_cubit.dart';
+import 'blocs/vendor/vendor_cubit.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const CravingApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class CravingApp extends StatelessWidget {
+  const CravingApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'Craving',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-        fontFamily: 'ProductSans',
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => CategoryCubit()..fetchCategories()),
+        BlocProvider(create: (_) => VendorCubit()..fetchVendors()),
+      ],
+      child: MaterialApp(
+        title: 'Craving',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          fontFamily: 'ProductSans',
+          useMaterial3: true,
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
+        ),
+        home: const HomeScreen(),
       ),
-      home: const MainNavigation(),
     );
   }
 }
