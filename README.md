@@ -60,8 +60,8 @@ lib/
 1. **Clone the repo**
 
    ```bash
-   git clone https://github.com/yourusername/craving-app.git
-   cd craving-app
+   git clone https://github.com/DhruvChaurasia9403/Craving.git
+   cd Craving
    ```
 
 2. **Install dependencies**
