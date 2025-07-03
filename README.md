@@ -95,11 +95,11 @@ Here are screenshots demonstrating core features of the Craving app:
 
 ### 1. 🏠 Home Page (Simple)
 
-![Home Screen](assets\home_screen.png)
+![Home Screen](assets/home_screen.png)
 
 ### 2. 🍽️ Product Screen
 
-![Product Screen](assets\product_screen.png)
+![Product Screen](assets/product_screen.png)
 
 ```
 
