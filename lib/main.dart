@@ -1,31 +1,46 @@
+// lib/main.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'screens/home/home_screen.dart';
 import 'blocs/category/category_cubit.dart';
 import 'blocs/vendor/vendor_cubit.dart';
+import 'blocs/product/product_cubit.dart';
+import 'blocs/cart/cart_cubit.dart'; // <-- Add this import
+import 'repositories/category_repository.dart';
+import 'repositories/vendor_repository.dart';
+import 'repositories/product_repository.dart';
+import 'screens/home_screen.dart';
 
 void main() {
-  runApp(const CravingApp());
+  runApp(const MyApp());
 }
 
-class CravingApp extends StatelessWidget {
-  const CravingApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => CategoryCubit()..fetchCategories()),
-        BlocProvider(create: (_) => VendorCubit()..fetchVendors()),
+        BlocProvider(
+          create: (_) => CategoryCubit(CategoryRepository()),
+        ),
+        BlocProvider(
+          create: (_) => VendorCubit(VendorRepository()),
+        ),
+        BlocProvider(
+          create: (_) => ProductCubit(ProductRepository()),
+        ),
+        BlocProvider( // <-- Add this
+          create: (_) => CartCubit(),
+        ),
       ],
       child: MaterialApp(
-        title: 'Craving',
         debugShowCheckedModeBanner: false,
+        title: 'Vendor App',
         theme: ThemeData(
           fontFamily: 'ProductSans',
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
           useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
         ),
         home: const HomeScreen(),
       ),

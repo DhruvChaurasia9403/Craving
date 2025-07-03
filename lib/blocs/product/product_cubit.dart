@@ -1,20 +1,19 @@
+import 'package:craving/repositories/product_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../models/product_model.dart';
-import '../../repositories/product_repository.dart';
+import 'product_state.dart';
 
-class ProductCubit extends Cubit<List<ProductModel>> {
+class ProductCubit extends Cubit<ProductState> {
   final ProductRepository _repository;
 
-  ProductCubit({ProductRepository? repository})
-      : _repository = repository ?? ProductRepository(),
-        super([]);
+  ProductCubit(this._repository) : super(ProductInitial());
 
-  Future<void> fetchProducts(String vendorId) async {
+  void fetchProducts(String vendorId) async {
+    emit(ProductLoading());
     try {
-      final products = await _repository.getProductsByVendor(vendorId);
-      emit(products);
+      final products = await _repository.getProducts(vendorId);
+      emit(ProductLoaded(products));
     } catch (e) {
-      emit([]);
+      emit(ProductError(e.toString()));
     }
   }
 }

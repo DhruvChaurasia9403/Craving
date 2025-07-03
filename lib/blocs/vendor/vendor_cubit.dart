@@ -1,21 +1,19 @@
-import 'package:craving/repositories/vendory_repository.dart';
+import 'package:craving/repositories/vendor_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../models/vendor_model.dart';
-// import '../../repositories/vendor_repository.dart';
+import 'vendor_state.dart';
 
-class VendorCubit extends Cubit<List<VendorModel>> {
+class VendorCubit extends Cubit<VendorState> {
   final VendorRepository _repository;
 
-  VendorCubit({VendorRepository? repository})
-      : _repository = repository ?? VendorRepository(),
-        super([]);
+  VendorCubit(this._repository) : super(VendorInitial());
 
   Future<void> fetchVendors() async {
+    emit(VendorLoading());
     try {
       final vendors = await _repository.getVendors();
-      emit(vendors);
+      emit(VendorLoaded(vendors));
     } catch (e) {
-      emit([]);
+      emit(VendorError(e.toString()));
     }
   }
 }

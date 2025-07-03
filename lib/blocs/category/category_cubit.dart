@@ -1,20 +1,19 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../models/category_model.dart';
+import 'category_state.dart';
 import '../../repositories/category_repository.dart';
 
-class CategoryCubit extends Cubit<List<CategoryModel>> {
+class CategoryCubit extends Cubit<CategoryState> {
   final CategoryRepository _repository;
 
-  CategoryCubit({CategoryRepository? repository})
-      : _repository = repository ?? CategoryRepository(),
-        super([]);
+  CategoryCubit(this._repository) : super(CategoryInitial());
 
   Future<void> fetchCategories() async {
+    emit(CategoryLoading());
     try {
       final categories = await _repository.getCategories();
-      emit(categories);
+      emit(CategoryLoaded(categories));
     } catch (e) {
-      emit([]);
+      emit(CategoryError(e.toString()));
     }
   }
 }
