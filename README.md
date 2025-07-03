@@ -89,22 +89,19 @@ craving-app/
 │   └── main.dart         # Entry point
 ```
 
-## 📸 UI Preview
-
-Here are screenshots demonstrating core features of the Craving app:
+## 📱 Screens
 
 ### 1. 🏠 Home Page (Simple)
 
-![Home Screen](assets/home_screen.png)
+<img src="assets/home_screen.png" alt="Home Screen" width="300"/>
 
 ### 2. 🍽️ Product Screen
 
-![Product Screen](assets/product_screen.png)
+<img src="assets/product_screen.png" alt="Product Screen" width="300"/>
+
 
 ```
 
-![Home Screen](screenshots/home.png)
-![Vendor Screen](screenshots/vendor.png)
 ```
 
 ## 📦 APK Download
