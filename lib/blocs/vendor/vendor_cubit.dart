@@ -9,11 +9,11 @@ class VendorCubit extends Cubit<VendorState> {
 
   Future<void> fetchVendors() async {
     emit(VendorLoading());
-    try {
+    try { //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403
       final vendors = await _repository.getVendors();
       emit(VendorLoaded(vendors));
     } catch (e) {
       emit(VendorError(e.toString()));
     }
   }
-}
+} //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403

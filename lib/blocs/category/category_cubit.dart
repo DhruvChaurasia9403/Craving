@@ -8,12 +8,12 @@ class CategoryCubit extends Cubit<CategoryState> {
   CategoryCubit(this._repository) : super(CategoryInitial());
 
   Future<void> fetchCategories() async {
-    emit(CategoryLoading());
+    emit(CategoryLoading()); //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403
     try {
       final categories = await _repository.getCategories();
       emit(CategoryLoaded(categories));
     } catch (e) {
       emit(CategoryError(e.toString()));
-    }
+    } //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403
   }
 }

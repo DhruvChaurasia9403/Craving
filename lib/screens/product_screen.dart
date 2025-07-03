@@ -132,12 +132,12 @@ class _ProductScreenState extends State<ProductScreen> with SingleTickerProvider
             const SizedBox(height: 2),
             Text(
               widget.vendor.location,
-              style: const TextStyle(fontSize: 14, color: Colors.white70),
+              style: const TextStyle(fontSize: 14, color: Colors.black38),
             ),
           ],
         ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.black54),
           onPressed: () => Navigator.of(context).maybePop(),
         ),
         bottom: PreferredSize(
@@ -148,6 +148,7 @@ class _ProductScreenState extends State<ProductScreen> with SingleTickerProvider
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Row(
+                  //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403
                   children: [
                     const Icon(Icons.star, color: Colors.green),
                     const SizedBox(width: 4),
@@ -185,6 +186,7 @@ class _ProductScreenState extends State<ProductScreen> with SingleTickerProvider
               child: ExpansionPanelList(
                 expansionCallback: (int index, bool isExpanded) {
                   setState(() {
+                    //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403
                     final key = categorized.keys.elementAt(index);
                     if (_expandedCategory == key) {
                       _expandedCategory = null;
@@ -256,6 +258,7 @@ class _ProductScreenState extends State<ProductScreen> with SingleTickerProvider
                                           onPressed: () {
                                             cartCubit.removeFromCart(product);
                                           },
+                                          //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403
                                         ),
                                         Text(
                                           '$qty',
@@ -320,6 +323,7 @@ class _ProductScreenState extends State<ProductScreen> with SingleTickerProvider
                 ),
                 TextButton(
                   onPressed: () {
+                    //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403
                     Navigator.pushNamed(context, '/cart');
                   },
                   child: const Text('Go to Cart', style: TextStyle(color: Colors.white)),
@@ -329,6 +333,6 @@ class _ProductScreenState extends State<ProductScreen> with SingleTickerProvider
           );
         },
       ),
-    );
+    ); //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403
   }
 }

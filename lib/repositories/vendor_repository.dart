@@ -5,7 +5,7 @@ import '../models/vendor_model.dart';
 class VendorRepository {
   Future<List<Vendor>> getVendors() async {
     await Future.delayed(const Duration(seconds: 2));
-
+    //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403
     const sampleJson = '''
 [
   {
@@ -104,4 +104,4 @@ class VendorRepository {
     final List decoded = jsonDecode(sampleJson);
     return decoded.map((e) => Vendor.fromJson(e)).toList();
   }
-}
+} //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403

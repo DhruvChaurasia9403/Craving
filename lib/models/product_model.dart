@@ -17,11 +17,11 @@ class Product {
     return Product(
       id: json['id'].toString(),
       name: json['name'],
-      image: json['image'],
+      image: json['image'], //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403
       price: (json['price'] is double)
           ? json['price']
           : double.tryParse(json['price'].toString()) ?? 0.0,
       category: json['category'] ?? '',
-    );
+    ); //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403
   }
 }

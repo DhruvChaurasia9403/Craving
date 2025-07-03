@@ -3,9 +3,9 @@ import '../models/category_model.dart';
 
 class CategoryTile extends StatelessWidget {
   final Category category;
-
+  //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403
   const CategoryTile({super.key, required this.category});
-
+  //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403
   @override
   Widget build(BuildContext context) {
     return ClipRRect(

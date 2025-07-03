@@ -8,7 +8,7 @@ class ProductCubit extends Cubit<ProductState> {
   ProductCubit(this._repository) : super(ProductInitial());
 
   void fetchProducts(String vendorId) async {
-    emit(ProductLoading());
+    emit(ProductLoading()); //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403
     try {
       final products = await _repository.getProducts(vendorId);
       emit(ProductLoaded(products));
@@ -17,3 +17,4 @@ class ProductCubit extends Cubit<ProductState> {
     }
   }
 }
+//By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403

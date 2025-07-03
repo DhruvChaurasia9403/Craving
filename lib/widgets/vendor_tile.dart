@@ -32,7 +32,7 @@ class VendorTile extends StatelessWidget {
             ),
           ],
         ),
-        child: Row(
+        child: Row( //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403
           children: [
             // Vendor Image
             ClipRRect(
@@ -92,7 +92,7 @@ class VendorTile extends StatelessWidget {
                     '${vendor.distance.toStringAsFixed(2)} km Away',
                     overflow: TextOverflow.ellipsis,
                   ),
-                ],
+                ], //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403
               ),
             ),
           ],

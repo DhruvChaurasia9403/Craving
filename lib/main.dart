@@ -1,4 +1,5 @@
 // lib/main.dart
+//By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'blocs/category/category_cubit.dart';
@@ -46,4 +47,4 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
-}
+} //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403

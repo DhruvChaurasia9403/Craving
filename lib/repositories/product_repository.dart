@@ -5,7 +5,7 @@ import '../models/product_model.dart';
 class ProductRepository {
   Future<List<Product>> getProducts(String vendorId) async {
     await Future.delayed(const Duration(seconds: 2));
-
+    //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403
     const sampleJson = '''
 [
   {
@@ -121,4 +121,4 @@ class ProductRepository {
     final List decoded = jsonDecode(sampleJson);
     return decoded.map((e) => Product.fromJson(e)).toList();
   }
-}
+} //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403

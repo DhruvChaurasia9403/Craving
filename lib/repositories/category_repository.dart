@@ -5,7 +5,7 @@ import '../models/category_model.dart';
 class CategoryRepository {
   Future<List<Category>> getCategories() async {
     await Future.delayed(const Duration(seconds: 2)); // simulate delay
-
+    //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403
     const sampleJson = '''
 [
   {

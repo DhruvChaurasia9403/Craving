@@ -12,7 +12,7 @@ class CartCubit extends Cubit<CartState> {
   void addToCart(Product product) {
     _quantities[product.id] = (_quantities[product.id] ?? 0) + 1;
     _products[product.id] = product;
-    _emitCartState();
+    _emitCartState(); //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403
   }
 
   void removeFromCart(Product product) {
@@ -30,7 +30,7 @@ class CartCubit extends Cubit<CartState> {
 
   void _emitCartState() {
     final items = <Product>[];
-    double total = 0.0;
+    double total = 0.0; //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403
     _quantities.forEach((id, qty) {
       final product = _products[id];
       if (product != null) {
@@ -39,7 +39,7 @@ class CartCubit extends Cubit<CartState> {
           total += product.price;
         }
       }
-    });
+    }); //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403
     emit(CartState(items: items, total: total));
   }
 }

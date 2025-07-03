@@ -9,13 +9,13 @@ abstract class ProductState extends Equatable {
 class ProductInitial extends ProductState {}
 
 class ProductLoading extends ProductState {}
-
+//By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403
 class ProductLoaded extends ProductState {
   final List<Product> products;
 
   ProductLoaded(this.products);
 
-  @override
+  @override //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403
   List<Object?> get props => [products];
 }
 

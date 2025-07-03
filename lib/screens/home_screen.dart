@@ -12,44 +12,77 @@ class HomeScreen extends StatefulWidget {
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
-}
+} //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403`
 
 class _HomeScreenState extends State<HomeScreen> {
   List _lastCategories = [];
   List _lastVendors = [];
+  String _searchQuery = '';
+  final TextEditingController _searchController = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
+  final Map<String, GlobalKey> _vendorKeys = {};
 
   @override
   void initState() {
     super.initState();
     context.read<CategoryCubit>().fetchCategories();
     context.read<VendorCubit>().fetchVendors();
+    _searchController.addListener(() {
+      setState(() {
+        _searchQuery = _searchController.text.trim().toLowerCase();
+      });
+      // After setState, scroll to first filtered vendor if any
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        final filtered = _filterVendors(_lastVendors);
+        if (filtered.isNotEmpty) {
+          final key = _vendorKeys[filtered.first.id];
+          if (key != null && key.currentContext != null) {
+            Scrollable.ensureVisible(
+              key.currentContext!,
+              duration: const Duration(milliseconds: 400),
+              curve: Curves.easeInOut,
+            );
+          }
+        }
+      });
+    });
+  } //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  List _filterVendors(List vendors) {
+    if (_searchQuery.isEmpty) return vendors;
+    return vendors.where((vendor) {
+      final name = vendor.name.toString().toLowerCase();
+      final location = vendor.location.toString().toLowerCase();
+      return name.contains(_searchQuery) || location.contains(_searchQuery);
+    }).toList();
   }
 
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
-    final double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       body: SafeArea(
         child: Stack(
           children: [
-            // Full Body
             Column(
               children: [
-                // Header Image
                 SizedBox(
-                  height: screenHeight * 0.22,
+                  height: screenHeight * 0.22, //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403
                   width: double.infinity,
                   child: Image.asset(
                     'assets/images/header.jpg',
                     fit: BoxFit.cover,
                   ),
                 ),
-
-                SizedBox(height: screenHeight * 0.065), // Leave space for search bar
-
-                // Main Scrollable Area
+                SizedBox(height: screenHeight * 0.065),
                 Expanded(
                   child: RefreshIndicator(
                     onRefresh: () async {
@@ -59,12 +92,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       ]);
                     },
                     child: SingleChildScrollView(
+                      controller: _scrollController,
                       physics: const AlwaysScrollableScrollPhysics(),
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Category Grid
                           BlocBuilder<CategoryCubit, CategoryState>(
                             builder: (context, state) {
                               if (state is CategoryLoaded) {
@@ -78,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   childAspectRatio: 1,
                                   children: state.categories
                                       .map((category) => CategoryTile(category: category))
-                                      .toList(),
+                                      .toList(), //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403
                                 );
                               } else if (state is CategoryLoading) {
                                 if (_lastCategories.isNotEmpty) {
@@ -101,9 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               return const SizedBox.shrink();
                             },
                           ),
-
                           const SizedBox(height: 20),
-
                           const Text(
                             'Restaurants Nearby',
                             style: TextStyle(
@@ -112,30 +143,40 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                           const SizedBox(height: 4),
-
-                          // Vendor List
                           BlocBuilder<VendorCubit, VendorState>(
                             builder: (context, state) {
+                              List vendors = [];
                               if (state is VendorLoaded) {
                                 _lastVendors = state.vendors;
-                                return Column(
-                                  children: state.vendors
-                                      .map((vendor) => VendorTile(vendor: vendor))
-                                      .toList(),
-                                );
+                                vendors = state.vendors;
                               } else if (state is VendorLoading) {
-                                if (_lastVendors.isNotEmpty) {
-                                  return Column(
-                                    children: _lastVendors
-                                        .map((vendor) => VendorTile(vendor: vendor))
-                                        .toList(),
-                                  );
-                                }
-                                return const Center(child: CircularProgressIndicator());
+                                vendors = _lastVendors;
                               } else if (state is VendorError) {
                                 return Text('Error: ${state.message}');
                               }
-                              return const SizedBox.shrink();
+                              final filteredVendors = _filterVendors(vendors);
+
+                              // Assign a GlobalKey for each vendor
+                              for (var vendor in vendors) {
+                                _vendorKeys.putIfAbsent(vendor.id, () => GlobalKey());
+                              } //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403
+                              if (state is VendorLoading && vendors.isEmpty) {
+                                return const Center(child: CircularProgressIndicator());
+                              }
+                              if (filteredVendors.isEmpty) {
+                                return const Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 32),
+                                  child: Center(child: Text('No restaurants found.')),
+                                );
+                              }
+                              return Column(
+                                children: filteredVendors
+                                    .map((vendor) => Container(
+                                  key: _vendorKeys[vendor.id],
+                                  child: VendorTile(vendor: vendor),
+                                ))
+                                    .toList(),
+                              );
                             },
                           ),
                         ],
@@ -145,8 +186,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-
-            // Back button & Title
+            // ... rest of your code (search bar, header, etc.) ...
             Positioned(
               top: screenHeight * 0.015,
               left: 12,
@@ -178,8 +218,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-
-            // Overlapping Search Bar
             Positioned(
               top: screenHeight * 0.18,
               left: 16,
@@ -188,6 +226,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 elevation: 6,
                 borderRadius: BorderRadius.circular(12),
                 child: TextField(
+                  controller: _searchController,
                   decoration: InputDecoration(
                     hintText: 'Search',
                     prefixIcon: const Icon(Icons.search),
@@ -200,7 +239,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-              ),
+              ), //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403
             ),
           ],
         ),

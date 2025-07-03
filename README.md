@@ -1,16 +1,134 @@
-# craving
+# Craving 🍔
 
-A new Flutter project.
+**Craving** is a Flutter-based food delivery application that connects users with nearby restaurants, enabling them to browse food categories, explore vendors, and order food seamlessly.
 
-## Getting Started
+![Flutter](https://img.shields.io/badge/Flutter-3.24-blue?logo=flutter)
+![Dart](https://img.shields.io/badge/Dart-3.3-blue?logo=dart)
+![State Management](https://img.shields.io/badge/BLoC-Architecture-orange)
+![License](https://img.shields.io/badge/License-MIT-green)
 
-This project is a starting point for a Flutter application.
+## ✨ Features
 
-A few resources to get you started if this is your first Flutter project:
+* 📦 View curated food **categories**
+* 🧑‍🍳 Explore **vendors** and restaurants
+* 🍱 Browse available **products/menus**
+* 🛒 Add food items to cart
+* 💬 Smooth navigation with **Flutter BLoC**
+* 💡 Clean and scalable folder structure
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 📱 Screens
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* Home Screen
+* Categories Screen
+* Vendor/Product Listing Screen
+* Product Details
+* Cart Page
+* Floating Menu Button with Restaurant Icon
+
+## 🧠 State Management
+
+We use **BLoC (Business Logic Component)** for scalable and testable state management.
+
+```
+lib/
+│
+├── blocs/
+│   ├── category/
+│   ├── vendor/
+│   └── product/
+│
+├── models/
+│   ├── category_model.dart
+│   ├── vendor_model.dart
+│   └── product_model.dart
+│
+├── screens/
+├── widgets/
+└── main.dart
+```
+
+## 🔧 Tech Stack
+
+* Flutter 3.24
+* Dart 3.3
+* BLoC for state management
+* Clean Architecture principles
+* Material UI design
+
+## 🚀 Getting Started
+
+1. **Clone the repo**
+
+   ```bash
+   git clone https://github.com/yourusername/craving-app.git
+   cd craving-app
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   flutter pub get
+   ```
+
+3. **Run the app**
+
+   ```bash
+   flutter run
+   ```
+
+## 📂 Project Structure
+
+```
+craving-app/
+│
+├── lib/
+│   ├── blocs/            # BLoC cubits and states
+│   ├── models/           # Data models
+│   ├── screens/          # UI screens
+│   ├── widgets/          # Reusable widgets
+│   └── main.dart         # Entry point
+```
+
+## 📸 UI Preview
+
+Here are screenshots demonstrating core features of the Craving app:
+
+### 1. 🏠 Home Page (Simple)
+
+![Home Screen](assets\images\home_screen.png)
+
+### 2. 🍽️ Product Screen
+
+![Product Screen](assets\images\product_screen.png)
+
+```
+
+![Home Screen](screenshots/home.png)
+![Vendor Screen](screenshots/vendor.png)
+```
+
+## 📦 APK Download
+
+You can try out the app by downloading the latest APK from the [Releases](https://github.com/yourusername/craving-app/releases) section.
+
+```
+[⬇️ Download APK](https://drive.google.com/file/d/1zQafU3Si3jMJX8k9cPDZQko_hxdU3CWK/view?usp=drivesdk)
+```
+
+## ✅ TODO
+
+* [x] Category-based product filtering
+* [x] Vendor screen integration
+* [ ] Implement order placing
+* [ ] Add Firebase backend (optional)
+* [ ] Add login/signup screen
+
+## 🧑‍💻 Developed By
+
+**Dhruv Chaurasia**
+Flutter Developer | Android Developer
+[GitHub](https://github.com/DhruvChaurasia9403)
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

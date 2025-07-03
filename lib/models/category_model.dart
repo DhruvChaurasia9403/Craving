@@ -10,10 +10,11 @@ class Category {
   });
 
   factory Category.fromJson(Map<String, dynamic> json) {
-    return Category(
+    return Category( //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403
       id: json['id'].toString(),
       name: json['name'],
       image: json['image'],
     );
   }
 }
+//By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403
