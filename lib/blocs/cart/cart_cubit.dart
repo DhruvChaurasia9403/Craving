@@ -10,27 +10,29 @@ class CartCubit extends Cubit<CartState> {
   CartCubit() : super(CartState(items: [], total: 0.0));
 
   void addToCart(Product product) {
-    _quantities[product.id] = (_quantities[product.id] ?? 0) + 1;
-    _products[product.id] = product;
-    _emitCartState(); //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403
+    final key = product.id.toString();
+    _quantities[key] = (_quantities[key] ?? 0) + 1;
+    _products[key] = product;
+    _emitCartState();
   }
 
   void removeFromCart(Product product) {
-    if (_quantities.containsKey(product.id) && _quantities[product.id]! > 0) {
-      _quantities[product.id] = _quantities[product.id]! - 1;
-      if (_quantities[product.id] == 0) {
-        _quantities.remove(product.id);
-        _products.remove(product.id);
+    final key = product.id.toString();
+    if (_quantities.containsKey(key) && _quantities[key]! > 0) {
+      _quantities[key] = _quantities[key]! - 1;
+      if (_quantities[key] == 0) {
+        _quantities.remove(key);
+        _products.remove(key);
       }
       _emitCartState();
     }
   }
 
-  int getQuantity(Product product) => _quantities[product.id] ?? 0;
+  int getQuantity(Product product) => _quantities[product.id.toString()] ?? 0;
 
   void _emitCartState() {
     final items = <Product>[];
-    double total = 0.0; //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403
+    double total = 0.0;
     _quantities.forEach((id, qty) {
       final product = _products[id];
       if (product != null) {
@@ -39,7 +41,7 @@ class CartCubit extends Cubit<CartState> {
           total += product.price;
         }
       }
-    }); //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403
+    });
     emit(CartState(items: items, total: total));
   }
 }

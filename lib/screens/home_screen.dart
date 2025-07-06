@@ -143,40 +143,25 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                           const SizedBox(height: 4),
+                          // Inside your home screen's build method, where you display vendors:
                           BlocBuilder<VendorCubit, VendorState>(
                             builder: (context, state) {
-                              List vendors = [];
-                              if (state is VendorLoaded) {
-                                _lastVendors = state.vendors;
-                                vendors = state.vendors;
-                              } else if (state is VendorLoading) {
-                                vendors = _lastVendors;
-                              } else if (state is VendorError) {
-                                return Text('Error: ${state.message}');
-                              }
-                              final filteredVendors = _filterVendors(vendors);
-
-                              // Assign a GlobalKey for each vendor
-                              for (var vendor in vendors) {
-                                _vendorKeys.putIfAbsent(vendor.id, () => GlobalKey());
-                              } //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403
-                              if (state is VendorLoading && vendors.isEmpty) {
+                              if (state is VendorLoading) {
                                 return const Center(child: CircularProgressIndicator());
-                              }
-                              if (filteredVendors.isEmpty) {
-                                return const Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 32),
-                                  child: Center(child: Text('No restaurants found.')),
+                              } else if (state is VendorLoaded) {
+                                final vendors = state.vendors;
+                                return ListView.builder(
+                                  shrinkWrap: true, // If inside another scrollable, else remove
+                                  physics: const NeverScrollableScrollPhysics(), // If inside another scrollable, else remove
+                                  itemCount: vendors.length,
+                                  itemBuilder: (context, index) {
+                                    return VendorTile(vendor: vendors[index]);
+                                  },
                                 );
+                              } else if (state is VendorError) {
+                                return Center(child: Text('Error: ${state.message}'));
                               }
-                              return Column(
-                                children: filteredVendors
-                                    .map((vendor) => Container(
-                                  key: _vendorKeys[vendor.id],
-                                  child: VendorTile(vendor: vendor),
-                                ))
-                                    .toList(),
-                              );
+                              return const SizedBox.shrink();
                             },
                           ),
                         ],

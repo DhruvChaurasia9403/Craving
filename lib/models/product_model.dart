@@ -1,27 +1,34 @@
+// product_model.dart
 class Product {
-  final String id;
+  final int id;
   final String name;
-  final String image;
+  final String detail;
   final double price;
+  final String image;
   final String category;
 
   Product({
     required this.id,
     required this.name,
-    required this.image,
+    required this.detail,
     required this.price,
+    required this.image,
     required this.category,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) {
+    final categoryList = json['categories'] as List<dynamic>?;
+    final category = (categoryList != null && categoryList.isNotEmpty)
+        ? categoryList.first['title'] as String? ?? 'Unknown'
+        : 'Unknown';
+
     return Product(
-      id: json['id'].toString(),
-      name: json['name'],
-      image: json['image'], //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403
-      price: (json['price'] is double)
-          ? json['price']
-          : double.tryParse(json['price'].toString()) ?? 0.0,
-      category: json['category'] ?? '',
-    ); //By Dhruv Chaurasia github : https://github.com/DhruvChaurasia9403
+      id: json['id'],
+      name: json['title'],
+      detail: json['detail'] ?? '',
+      price: (json['price'] as num).toDouble(),
+      image: json['mediaurls']?['images']?[0]?['default'] ?? '',
+      category: category,
+    );
   }
 }
