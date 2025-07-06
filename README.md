@@ -109,7 +109,7 @@ craving-app/
 You can try out the app by downloading the latest APK from the [Releases](https://github.com/DhruvChaurasia9403/Craving) section.
 
 ```
-https://drive.google.com/file/d/1zTDMaRwkJ701SIKEg78tlqukS0TbK1g1/view?usp=drivesdk
+https://drive.google.com/file/d/1zvgyODLGCHRpXIFDqWYhGFiMQDn5goOW/view?usp=drivesdk
 ```
 
 ## ✅ TODO
